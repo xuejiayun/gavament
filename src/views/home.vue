@@ -47,7 +47,7 @@
                                 <div class="subtitle">{{item.subtitle}}</div>
                                 <ul>
                                     <li v-for="(value,index) in item.articleArr" :key="index">
-                                        <a href="javascript:;" :class="{hot:value.isHot}">{{value.title}}</a>
+                                        <a @click="$router.push('/infoDetail')" href="javascript:;" :class="{hot:value.isHot}">{{value.title}}</a>
                                         <i href="javascript:;">{{value.num}}</i>
                                     </li>
                                 </ul>
@@ -155,10 +155,11 @@
         },
         mounted () {
             this.imgLoad()
+            let _this = this
             window.addEventListener('resize', () => {
-                if (this.$refs.imgHeight) {
-                    this.bannerHeight = this.$refs.imgHeight[0].height
-                    this.imgLoad()
+                if (_this.$refs.imgHeight.length > 0) {
+                    _this.bannerHeight = _this.$refs.imgHeight[0].height
+                    _this.imgLoad()
                 }
             },false)
         }
@@ -183,6 +184,9 @@
     }
 </style>
 <style scoped lang="scss">
+    .home {
+        margin-top: -90px;
+    }
     .home img {
         height: auto;
         width: 100%;
@@ -294,18 +298,20 @@
         .smallClassify a::after {
             content:'';
             position: absolute;
-            left: 0;
+            left: 50%;
             bottom: 0;
+            transform: translateX(-50%);
             width: 0;
-            border-bottom: 3px solid transparent;
-            transition: width 0.3s;
+            height: 3px;
+            background: transparent;
+            transition: all 0.3s;
         }
         .smallClassify a.current {
             color: #0098EA;
         }
         .smallClassify a.current::after {
             width: 100%;
-            border-bottom-color: #0098EA;
+            background: #0098EA;
         }
         .content {
             width: 1200px;

@@ -5,16 +5,15 @@
                 <div class="logo"></div>
                 <div class="menu">
                     <div class="nav">
-                        <router-link to="/home" tag="a">首页</router-link>
-                        <router-link to="/data" tag="a">数据集</router-link>
-                        <router-link to="/file" tag="a">文件</router-link>
-                        <router-link to="/service" tag="a">API服务</router-link>
+                        <router-link exact :to="{path: '/home'}" tag="a">首页</router-link>
+                        <router-link exact :to="{path: '/infoData', query: {name: 'data'}}" tag="a">数据集</router-link>
+                        <router-link exact :to="{path:'/infoData', query: {name: 'file'}}" tag="a">文件</router-link>
+                        <router-link exact :to="{path:'/infoData', query: {name: 'service'}}" tag="a">API服务</router-link>
                     </div>
                     <div class="search">
                         <input type="text" placeholder="请输入数据/文件/API名称关键词…">
                         <span>搜索</span>
                     </div>
-
                 </div>
                 <div class="login">
                     <router-link to="login" >登录</router-link>
@@ -27,6 +26,15 @@
 
 <script>
     export default {
+        async created () {
+            let {data} = await this.$share.getHotspotInfo()
+            console.log(data);
+            let {data:data1} = await this.$share.getHotspotInfo({resType: 3})
+            console.log(data1);
+            let {data:data2} = await this.$share.getClassify()
+            console.log(data2);
+            //
+        },
         methods: {
 
         }
@@ -35,19 +43,15 @@
 
 <style scoped lang="scss">
     header {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
+        width: 100%;
         height: 90px;
         background: rgba(0,0,0,.15);
-        z-index: 10;
         .wrapper {
             width: 1200px;
             height: 100%;
             margin: 0 auto;
             position: relative;
+            z-index: 10;
             .logo {
                 position: absolute;
                 left: 0;
@@ -94,7 +98,7 @@
                 background: rgba(255,255,255,0.8);
                 outline: none;
                 border: 1px solid #89cdfd;
-                height: 28px;
+                height: 30px;
                 line-height: 32px;
                 border-radius: 20px 0 0 20px;
                 width: calc(100% - 105px);

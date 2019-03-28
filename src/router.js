@@ -2,11 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/views/index'
 import Home from '@/views/home'
-import Data from '@/views/data'
-import File from '@/views/file'
-import Service from '@/views/service'
 import Login from '@/views/login'
-
+import InfoData from '@/components/infoData'
+import InfoDetail from '@/components/infoDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -17,6 +15,7 @@ export default new Router({
       path: '/',
       name: 'index',
       component: Index,
+      redirect: 'home',
       children: [
         {
           path: '/home',
@@ -24,26 +23,21 @@ export default new Router({
           component: Home
         },
         {
-          path: '/data',
-          name: 'data',
-          component: Data
+          path: '/infoData:name?',
+          name: 'infoData',
+          component: InfoData
         },
         {
-          path: '/file',
-          name: 'file',
-          component: File
-        },
-        {
-          path: '/service',
-          name: 'service',
-          component: Service
-        },
-        {
-          path: '/login',
-          name: 'login',
-          component: Login
+          path: '/infoDetail',
+          name: 'infoDetail',
+          component: InfoDetail
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })

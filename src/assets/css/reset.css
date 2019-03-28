@@ -1,4 +1,4 @@
-body,ul,ol,li，a，img,p {
+body,ul,ol,li，a，img,p,i,s,input {
     padding: 0;
     margin: 0;
 }
@@ -10,4 +10,17 @@ a {
 }
 i {
     font-style: normal;
+}
+s {
+    text-decoration:none;
+}
+.clearFix::after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearFix {
+
 }
